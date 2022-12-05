@@ -1,0 +1,29 @@
+Post properties:
+shortcode
+mediaid
+title
+owner_profile
+owner_username
+owner_id
+date_local
+date
+url
+typename[GraphImage,GraphVideo,GraphSidecar]
+mediacount
+caption
+caption_mentions
+caption_hastags
+is_video
+video_url
+video_view_count
+video_duration
+likes
+comments
+
+method:
+get_sidecar_nodes()
+
+PostSideCarNode properties:
+display_url
+is_video
+video_url
