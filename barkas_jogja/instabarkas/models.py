@@ -35,7 +35,7 @@ class PostSideCard(models.Model):
     sidecard_len = models.IntegerField()
     display_url = models.CharField(max_length=256)
     is_video = models.BooleanField()
-    video_url = models.CharField(max_length=700)
+    video_url = models.CharField(max_length=700, blank=True, null=True)
 
     def __str__(self):
         return str(self.post) + " " + str(self.sidecard_len)

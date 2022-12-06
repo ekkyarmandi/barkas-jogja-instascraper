@@ -21,7 +21,7 @@ from instabarkas.models import (
 from func import load_cookies
 
 L = Instaloader()
-L.context._session.cookies.update(load_cookies("barkas_jogja\cookies.json"))
+L.context._session.cookies.update(load_cookies("cookies.json"))
 
 targets = [
     "infobarkas_jogja",
@@ -89,7 +89,7 @@ for target in targets:
                                 post=scraped_post,
                                 sidecard_len=post.mediacount,
                                 display_url=sidecard.display_url,
-                                is_video=sidecard.is_vide,
+                                is_video=sidecard.is_video,
                                 video_url=sidecard.video_url
                             )
 
