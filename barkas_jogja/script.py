@@ -67,6 +67,7 @@ for target in targets:
                 except:
                     scraped_post = Post.objects.create(
                         shortcode=post.shortcode,
+                        owner=owner,
                         url=post_url,
                         img_url=post.url,
                         caption=post.caption,

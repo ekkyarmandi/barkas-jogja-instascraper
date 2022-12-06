@@ -10,6 +10,7 @@ class PostOwner(models.Model):
 
 class Post(models.Model):
     shortcode = models.CharField(max_length=256,unique=True,primary_key=True)
+    owner = models.ForeignKey("PostOwner", on_delete=models.CASCADE, blank=True, null=True)
     url = models.CharField(max_length=256)
     img_url = models.CharField(max_length=700)
     caption = models.CharField(max_length=1200, blank=True, null=True)

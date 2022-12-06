@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-header mt-5">
+    <h1 class="text-center">Barkas Jogja Instascraper</h1>
+    <p class="text-center">({{ posts|length }} total posts)</p>
+</div>
+<div class="post-container">
+    {% for post in posts %}
+    <div class="post-item mt-2 p-3 border">
+        <h5 class="post-item__title">
+            <span>id: <a class="text-dark text-decoration-none" target="_blank" href="{{ post.url }}">{{ post.shortcode }}</a></span>
+        </h5>
+        <img src="{{ post.img_url }}" alt="{{ post.shortcode }}" style="width: 200px;">
+        <p>{{ post.caption }}</p>
+        <p class="post-item__likes-comments small m-0">
+            <span><i class="fa-regular fa-thumbs-up"></i></span>
+            <span>{{ post.likes }}</span>
+            <span class="ms-2"><i class="fa-regular fa-comment"></i></span>
+            <span>{{ post.comments }}</span>
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
