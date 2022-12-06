@@ -1,22 +1,23 @@
 from django.db import models
 
 class PostOwner(models.Model):
-    owner_username = models.CharField(max_length=256)
-    owner_followers = models.IntegerField()
-    owner_total_posts = models.IntegerField()
+    username = models.CharField(max_length=256,unique=True,primary_key=True)
+    followers = models.IntegerField()
+    total_post = models.IntegerField()
 
     def __str__(self):
-        return f"{self.owner_username} (followers: {self.owner_followers}, total_post: {self.owner_followers})"
+        return f"{self.username} (followers: {self.followers}, total_post: {self.total_post})"
 
 class Post(models.Model):
-    post_url = models.CharField(max_length=256)
-    shortcode = models.CharField(max_length=256)
-    thumbnail_url = models.CharField(max_length=700)
-    caption = models.CharField(max_length=1200)
+    shortcode = models.CharField(max_length=256,unique=True,primary_key=True)
+    url = models.CharField(max_length=256)
+    img_url = models.CharField(max_length=700)
+    caption = models.CharField(max_length=1200, blank=True, null=True)
     product_name = models.CharField(max_length=256, blank=True, null=True)
     product_label = models.CharField(max_length=256, blank=True, null=True)
     product_category = models.CharField(max_length=256, blank=True, null=True)
     seller_username = models.CharField(max_length=256, blank=True, null=True)
+    seller_phonenumber = models.CharField(max_length=256, blank=True, null=True)
     post_date = models.DateTimeField()
     price = models.CharField(max_length=256, blank=True, null=True)
     likes = models.IntegerField()
@@ -40,10 +41,15 @@ class PostSideCard(models.Model):
         return str(self.post) + " " + str(self.sidecard_len)
 
 class ProfileAnalytic(models.Model):
-    created = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     profile = models.ForeignKey("PostOwner", on_delete=models.CASCADE)
     followers = models.IntegerField()
-    total_posts = models.IntegerField()
+    total_post = models.IntegerField()
 
     def __str__(self):
-        return self.profil
+        return f"{self.created.strftime('%Y-%m-%d_%T')} {self.profile.username} ({self.profile.followers}/{self.profile.total_post})"
+
+class ScrapingHistory(models.Model):
+    scraping_date = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey("PostOwner", on_delete=models.CASCADE)
+    post = models.ForeignKey("Post", on_delete=models.CASCADE)
